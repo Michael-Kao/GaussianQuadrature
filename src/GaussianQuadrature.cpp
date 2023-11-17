@@ -35,10 +35,15 @@ double GaussianQuadrature::gaussian_quadrature(int n, double a_x, double b_x, do
 
 void GaussianQuadrature::run() {
     double  a = -2, b = 6;
-    int InteV = 1;
+    int InteV = 8;
     int N = 4;
-    for(int interval = InteV; interval <= InteV; interval *= 2) {
-        for(int n = 1; n <= N; n++) {
+    if(N > 4) {
+        std::cout << "N cannot greater than 4\n";
+        return;
+    }
+    std::cout << "num of sample points : " << N << std::endl;
+    for(int interval = 1; interval <= InteV; interval *= 2) {
+        for(int n = N; n <= N; n++) {
             double sum = 0;
             double h = 1.0 * (b - a) / interval;
             for (int i = 0; i < interval * interval; i++) {
@@ -52,7 +57,7 @@ void GaussianQuadrature::run() {
                 sum += curSum;
             }
             // sum = gaussian_quadrature(4, -2, 6, -2, 6);
-            std::cout << "num of sample points : " << n << "\n    ";
+            std::cout << "num of interval : " << interval << "\n    ";
             std::cout << std::setprecision(15) << sum << std::endl;
             RelaError.push_back(fabs(470.327210063638 - sum) / 470.327210063638);
         }
